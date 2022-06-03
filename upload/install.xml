@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <name>Affiliate Payout</name>
+    <version>1.1.0</version>
+	<code>affiliate_payout_bravo_net_solution</code>
+    <author>WZ | Bravo Net Solution</author>
+    <link>http://www.bravonet.digital</link>
+	
+	
+	<file path="admin/language/*/common/column_left.php">
+        <operation>
+			<search><![CDATA[$_['text_api']                  = 'API';]]></search>         
+            <add position="after"><![CDATA[ 
+				$_['text_affiliate_payout']                 = 'Affiliates Payout';
+			]]></add>
+        </operation>
+    </file>
+	
+	
+	<file path="admin/controller/common/column_left.php">
+        <operation>
+			<search><![CDATA[
+				if ($this->user->hasPermission('access', 'marketing/coupon')) {	
+			]]></search>         
+            <add position="before"><![CDATA[ 
+				if ($this->user->hasPermission('access', 'marketing/affiliate_payout')) {
+				$marketing[] = array(
+					'name'	   => $this->language->get('text_affiliate_payout'),
+					'href'     => $this->url->link('marketing/affiliate_payout', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			]]></add>
+        </operation>
+    </file>
+	
+	
+	
+	<file path="catalog/controller/account/account.php">
+        <operation>
+			<search><![CDATA[
+				$this->load->model('account/customer');
+			]]></search>         
+            <add position="after"><![CDATA[ 
+				$data['text_payout_request'] = $this->language->get('text_payout_request');
+				$data['text_payout_history'] = $this->language->get('text_payout_history');
+				$data['payout_request'] = $this->url->link('affiliate/payout_request', '', true);
+				$data['payout_history'] = $this->url->link('affiliate/payout_history', '', true);
+			]]></add>
+        </operation>
+    </file>
+	
+	<file path="catalog/language/*/account/account.php">
+        <operation>
+			<search><![CDATA[
+				$_['text_account']        = 'Account';
+			]]></search>         
+            <add position="after"><![CDATA[ 
+				$_['text_payout_request']         = 'Payout Request';
+				$_['text_payout_history']         = 'Payout History';
+			]]></add>
+        </operation>
+    </file>
+	
+    <file path="catalog/view/theme/*/template/account/account.twig">
+        <operation>
+			<search><![CDATA[
+				<li><a href="{{ tracking }}">{{ text_tracking }}</a></li>
+			]]></search>         
+            <add position="after"><![CDATA[ 
+				<li><a href="{{ payout_request }}">{{ text_payout_request }}</a></li>
+				<li><a href="{{ payout_history }}">{{ text_payout_history }}</a></li>
+			]]></add>
+        </operation>
+    </file>
+
+</modification>
