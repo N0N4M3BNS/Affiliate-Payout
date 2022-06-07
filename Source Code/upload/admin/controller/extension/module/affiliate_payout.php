@@ -107,7 +107,7 @@ class ControllerExtensionModuleAffiliatePayout extends Controller {
 		$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "affiliate_payout` (
 		  `payout_id` int(11) NOT NULL AUTO_INCREMENT,
 		  `affiliate_id` int(11) NOT NULL,
-		  `payout_amount` decimal(4,2) NOT NULL,
+		  `payout_amount` decimal(15,4) NOT NULL,
 		  `payout_currency` varchar(11) NOT NULL,
 		  `payout_method` varchar(11) NOT NULL,
 		  `payout_status` varchar(15) NOT NULL,
