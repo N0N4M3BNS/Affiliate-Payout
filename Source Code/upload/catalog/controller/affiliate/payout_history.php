@@ -20,7 +20,7 @@ class ControllerAffiliatePayoutHistory extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
-			'href' => $this->url->link('affiliate/account', '', true)
+			'href' => $this->url->link('account/account', '', true)
 		);
 
 		$data['breadcrumbs'][] = array(
